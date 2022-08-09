@@ -1,0 +1,6 @@
+{{ if ne .chezmoi.os "darwin" }}
+.tmux_darwin
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.tmux_linux
+{{ end }}
