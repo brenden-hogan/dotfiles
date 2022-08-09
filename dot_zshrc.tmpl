@@ -1,0 +1,55 @@
+# User alias's
+
+if ! pgrep -x "unison" > /dev/null
+then
+    unison &> /tmp/unison.log &
+fi
+
+alias ll='ls -l'
+alias lla='ls -al'
+alias llt='ls -altr'
+
+export DEVENV={{ .devenv }}
+
+alias dev-env='ssh $DEVENV'
+alias auth='kinit -f && mwinit'
+alias ws='cd ~/workplace/'
+
+alias h='history 0'
+alias hFind='h | grep -i'
+
+alias sZsh='source ~/.zshrc'
+
+alias gs='git status'
+alias gb='git branch -a'
+alias gco='git checkout'
+
+fWeb() {
+  ssh -N -L 3000:localhost:3000 $DEVENV &;
+  ssh -N -L 8000:localhost:8000 $DEVENV &;
+}
+
+# Set up asdf for Python package management
+. $HOME/.asdf/asdf.sh
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+
+alias cdF='z'
+alias cdFi='zi'
+eval "$(zoxide init zsh)"
+
+setopt inc_append_history
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH=$HOME/.toolbox/bin:$PATH
