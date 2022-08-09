@@ -4,3 +4,5 @@
 {{ if ne .chezmoi.os "linux" }}
 .tmux_linux
 {{ end }}
+LICENSE
+README.md
