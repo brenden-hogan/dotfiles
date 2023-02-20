@@ -38,6 +38,9 @@ alias backupInit='conserve init $BACKUP_DIR'
 alias backupVer='conserve versions --sizes $BACKUP_DIR'
 alias backupRestore='conserve restore $BACKUP_DIR $RESTORE_DIR'
 
+
+alias wUnison='watch "ps -ef | grep unison | grep -v grep"'
+
 # Set up asdf for Python package management
 . $HOME/.asdf/asdf.sh
 # append completions to fpath
