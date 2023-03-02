@@ -12,7 +12,7 @@ alias llt='ls -altr'
 export DEVENV={{ .devenv }}
 
 alias dev-env='ssh $DEVENV'
-alias auth='kinit -f && mwinit'
+alias auth='{{ .auth_cmd }}'
 alias ws='cd ~/workplace/'
 
 alias h='history 0'
