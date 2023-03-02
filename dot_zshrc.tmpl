@@ -1,3 +1,10 @@
+export ALTZSH={{ .alt_zsh }}
+
+if [[ "$ALTZSH" != "" ]]
+then  
+    source $ALTZSH
+fi
+
 # User alias's
 
 if ! pgrep -x "unison" > /dev/null
