@@ -50,6 +50,12 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+# Used if stg-git is installed and the user has run `stg completion zsh -o ~/stg_compl.sh`
+if [ ! -f !/stg_compl.sh ]; then
+  fpath=(~/stg_compl.sh $fpath)
+  # initialise completions with ZSH's compinit
+  autoload -Uz compinit && compinit
+fi
 
 alias cdF='z'
 alias cdFi='zi'
