@@ -31,6 +31,10 @@ gitRecur() {
   find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} $* \;
 }
 
+stgRecur() {
+  find . -type d -depth 1 -exec stg -C {} $* \;
+}
+
 export BACKUP_DIR={{ .backup_dir }}
 export BACKUP_SRC={{ .code_repo }}
 export RESTORE_DIR={{ .restore_dir }}
