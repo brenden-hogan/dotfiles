@@ -1,0 +1,46 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+set PATH $HOME/.cargo/bin $PATH
+
+alias ll='ls -l'
+alias lla='ls -al'
+alias llt='ls -altr'
+
+set DEVENV {{ .devenv }}
+
+alias dev-env='ssh $DEVENV'
+alias auth='{{ .auth_cmd }}'
+alias ws='cd ~/workplace/'
+
+alias h='history 0'
+alias hFind='h | grep -i'
+
+alias gs='git status'
+alias gb='git branch -a'
+alias gco='git checkout'
+alias gclean='git clean -xdf'
+alias grs1='git reset HEAD~'
+function gitRecur
+  find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} $argv \;
+end
+
+function stgRecur
+  find . -type d -depth 1 -exec stg -C {} $argv \;
+end
+
+set BACKUP_DIR {{ .backup_dir }}
+set BACKUP_SRC {{ .code_repo }}
+set RESTORE_DIR {{ .restore_dir }}
+
+alias backup='conserve backup $BACKUP_DIR $BACKUP_SRC --exclude node_modules'
+alias backupInit='conserve init $BACKUP_DIR'
+alias backupVer='conserve versions --sizes $BACKUP_DIR'
+alias backupRestore='conserve restore $BACKUP_DIR $RESTORE_DIR'
+
+alias wUnison='watch "ps -ef | grep unison | grep -v grep"'
+
+zoxide init fish | source
+set PATH $HOME/.toolbox/bin $PATH
+
