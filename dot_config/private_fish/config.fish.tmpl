@@ -2,13 +2,20 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set PATH $HOME/.cargo/bin $PATH
+set ALTFISH {{ .alt_fish }}
+
+if [ "$ALTFISH" != "" ]
+    source $ALTFISH
+end
+
+
+set -gx PATH $HOME/.cargo/bin $PATH
 
 alias ll='ls -l'
 alias lla='ls -al'
 alias llt='ls -altr'
 
-set DEVENV {{ .devenv }}
+set -gx DEVENV {{ .devenv }}
 
 alias dev-env='ssh $DEVENV'
 alias auth='{{ .auth_cmd }}'
@@ -42,5 +49,5 @@ alias backupRestore='conserve restore $BACKUP_DIR $RESTORE_DIR'
 alias wUnison='watch "ps -ef | grep unison | grep -v grep"'
 
 zoxide init fish | source
-set PATH $HOME/.toolbox/bin $PATH
+set -gx PATH $HOME/.toolbox/bin $PATH
 
