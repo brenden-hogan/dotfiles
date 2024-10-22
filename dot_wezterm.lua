@@ -6,6 +6,12 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 local keys = {}
 
+-- font
+config.font = wezterm.font('CommitMono')
+
+-- color scheme
+config.color_scheme = 'Bim (Gogh)'
+
 -- print the workspace name at the upper right
 wezterm.on("update-right-status", function(window, pane)
   window:set_right_status(window:active_workspace())
