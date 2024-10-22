@@ -16,8 +16,10 @@ alias lla='ls -al'
 alias llt='ls -altr'
 
 set -gx DEVENV {{ .devenv }}
+set -gx DEVENVAL2 {{ .devenv_al2 }}
 
 alias dev-env='ssh $DEVENV'
+alias dev-env-al2='ssh $DEVENVAL2'
 alias auth='{{ .auth_cmd }}'
 alias ws='cd ~/workplace/'
 
