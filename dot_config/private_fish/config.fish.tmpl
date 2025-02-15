@@ -15,13 +15,23 @@ alias ll='ls -l'
 alias lla='ls -al'
 alias llt='ls -altr'
 
+{{- if eq .role "work" }}
 set -gx DEVENV {{ .devenv }}
 set -gx DEVENVAL2 {{ .devenv_al2 }}
 
 alias dev-env='ssh $DEVENV'
 alias dev-env-al2='ssh $DEVENVAL2'
 alias auth='{{ .auth_cmd }}'
-alias ws='cd ~/workplace/'
+{{- end }}
+
+{{- if eq .role "home" }}
+alias npm='pnpm'
+{{- end }}
+
+
+
+
+alias ws='cd {{.code_repo}}'
 
 alias llt='eza --tree --level 15 -l'
 alias lt='eza --tree --level 15'
@@ -41,15 +51,6 @@ end
 function stgRecur
   find . -type d -depth 1 -exec stg -C {} $argv \;
 end
-
-set BACKUP_DIR {{ .backup_dir }}
-set BACKUP_SRC {{ .code_repo }}
-set RESTORE_DIR {{ .restore_dir }}
-
-alias backup='conserve backup $BACKUP_DIR $BACKUP_SRC --exclude node_modules'
-alias backupInit='conserve init $BACKUP_DIR'
-alias backupVer='conserve versions --sizes $BACKUP_DIR'
-alias backupRestore='conserve restore $BACKUP_DIR $RESTORE_DIR'
 
 alias wUnison='watch "ps -ef | grep unison | grep -v grep"'
 
